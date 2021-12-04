@@ -20,10 +20,15 @@ fn main() {
 }
 
 fn input_guess() -> u8 {
-    println!("Please input your guess.");
-    let mut guess = String::new();
-    io::stdin()
-        .read_line(&mut guess)
-        .expect("Failed to read line");
-    return guess.trim().parse::<u8>().expect("Please type a number!");
+    loop {
+        println!("Please input your guess.");
+        let mut guess = String::new();
+        io::stdin()
+            .read_line(&mut guess)
+            .expect("Failed to read line");
+        match guess.trim().parse::<u8>() {
+            Ok(number) => return number,
+            Err(_) => continue,
+        };
+    }
 }
